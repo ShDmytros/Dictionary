@@ -22,7 +22,9 @@ public:
 	void FindAWord(map<string, string>& dict)
 	{
 		if (dict.size() == 0) {
+			setting.setColor(4);
 			cout << "Sorry you don't have any words yet!" << endl;
+			setting.setColor(7);
 			return;
 		}
 
@@ -240,14 +242,14 @@ public:
 				data_file.close();
 				dict = {};
 				setting.setColor(4);
-				cout << "Data have been reseted successfully!" << endl;
+				cout << "Data have been deleted successfully!" << endl;
 				setting.setColor(7);
 			}
 		}
 		else
 		{
 			setting.setColor(6);
-			cout << "Your choise is not delete!" << endl;
+			cout << "Your choice is to not delete!" << endl;
 			setting.setColor(7);
 		}
 	}

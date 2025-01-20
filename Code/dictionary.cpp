@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <map>
-#include <algorithm>
 #include <Windows.h>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 
 
@@ -30,9 +30,7 @@ public:
 
 		string learning_language_word;
 
-		setting.setColor(10);
 		cout << "Type a learning word that you want to find: ";
-		setting.setColor(7);
 		cin >> learning_language_word;
 
 		auto seeking_word = dict.find(learning_language_word);
@@ -54,9 +52,7 @@ public:
 		string learning_language_word;
 		string native_language_word;
 
-		setting.setColor(10);
 		cout << "Type a word from language that you study: ";
-		setting.setColor(7);
 		cin >> learning_language_word;
 
 		auto seeking_word = dict.find(learning_language_word);
@@ -68,9 +64,7 @@ public:
 			return;
 		}
 
-		setting.setColor(10);
 		cout << "Type a word from language that your native: ";
-		setting.setColor(7);
 		cin >> native_language_word;
 
 		dict.insert({ learning_language_word, native_language_word });
@@ -88,9 +82,7 @@ public:
 
 		string learning_language_word;
 
-		setting.setColor(10);
 		cout << "Type a word from language you study that you want to delete: ";
-		setting.setColor(7);
 		cin >> learning_language_word;
 
 		if (dict.erase(learning_language_word))
@@ -120,9 +112,7 @@ public:
 
 		string learning_language_word;
 
-		setting.setColor(10);
 		cout << "Type a learning word that you want to edit: ";
-		setting.setColor(7);
 		cin >> learning_language_word;
 
 		auto seeking_word = dict.find(learning_language_word);
@@ -145,6 +135,7 @@ public:
 		}
 	}
 
+
 	void showAllWords(const map<string, string>& dict)
 	{
 		if (dict.size() == 0) {
@@ -158,6 +149,7 @@ public:
 		{
 			cout << it->first << " - " << it->second << "\n";
 		}
+		cout << endl << "---------------------------------------------------" << endl;
 	}
 };
 
@@ -256,13 +248,73 @@ public:
 };
 
 
-class Menu : public GraphicSettings, public WorkingWithWords, public WorkingWithFiles
+class Exercises
+{
+	GraphicSettings setting;
+
+public:
+	void guessAWord(map<string, string> dict)
+	{
+		cin.ignore();
+		int askedWord_index;
+		string askedWord_foreign;
+		string askedWord_native;
+		string answear;
+
+		setting.setColor(6);
+		cout << "Type '1' if you want to leave earlier!" << endl;
+		setting.setColor(7);
+
+		while(dict.size() != 0)
+		{
+			askedWord_index = rand() % dict.size();
+			
+			int currentIndex = 0;
+			
+			for (const auto& pair : dict)
+			{
+				if (currentIndex == askedWord_index)
+				{
+					askedWord_foreign = pair.first;
+					askedWord_native = pair.second;
+				}
+				currentIndex++;
+			}
+
+			cout << "Translate a word '" << askedWord_foreign << "' into your native language: ";
+			getline(cin, answear);
+
+			if (answear == askedWord_native)
+			{
+				setting.setColor(2);
+				cout << "Congratulation! You are right!" << endl;
+				setting.setColor(7);
+				dict.erase(askedWord_foreign);
+			}
+			else if (answear == "1") return;
+			else
+			{
+				setting.setColor(4);
+				cout << "You should study harder the word of " << askedWord_foreign << "." << endl;
+				setting.setColor(7);
+			}
+		}
+
+		setting.setColor(2);
+		cout << "Alright, you gueesed all words!" << endl;
+		setting.setColor(7);
+	}
+};
+
+
+class Menu : public GraphicSettings, public WorkingWithWords, public WorkingWithFiles, public Exercises
 {
 protected:
 	int option;
 	map<string, string> dict;
+
+
 public:
-	Menu(int _option, map<string, string>& _dict) : option{ _option }, dict{ _dict } {}
 	Menu(map<string, string>& _dict) : option{ 0 }, dict{ _dict } {}
 	~Menu() 
 	{ 
@@ -277,7 +329,7 @@ public:
 		cout << "------------------" << endl;
 		cout << "|      Menu      |" << endl;
 		cout << "------------------" << endl;
-		setColor(175);
+		setColor(30);
 		cout << "Choose your option:" << endl;
 		setColor(9);
 		cout << "1.Find word" << endl;;
@@ -287,10 +339,11 @@ public:
 		cout << "5.Show all words" << endl;
 		cout << "6.Export Data" << endl;
 		cout << "7.Delete All Data" << endl;
-		cout << "8.Exit" << endl;
+		cout << "8.Game 'Guess a word'" << endl;
+		cout << "9.Exit" << endl;
 		setColor(7);
 		
-		cout << "Write your option (1, 2, 3, 4, 5, 6, 7, 8): ";
+		cout << "Write your option (1, 2, 3, 4, 5, 6, 7, 8, 9): ";
 		cin >> option;
 
 		if (option == 1)
@@ -352,6 +405,14 @@ public:
 			menu_self();
 		}
 
+		if (option == 8)
+		{
+			system("cls");
+			guessAWord(dict);
+			cout << endl;
+			menu_self();
+		}
+
 		else {
 			return;
 		}
@@ -363,8 +424,9 @@ int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+	srand(time(0));
 
 	map<string, string> dictionary;
-	Menu menu(2, dictionary);
+	Menu menu(dictionary);
 	menu.menu_self();
 }

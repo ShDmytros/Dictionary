@@ -2,6 +2,8 @@
 
 ### _This program is for learning foreign languages._
 
+--------
+
 ## __Option__
 1. Find a Words
 2. Add new word
@@ -12,6 +14,3 @@
 7. Delete All Data
 8. Game 'Guess a word'
 9. Exit
-
-
-------------------------------------------------

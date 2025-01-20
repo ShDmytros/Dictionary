@@ -1,1 +1,3 @@
-This is a dictionary for learning languages.
+# Dictionary
+
+## This program is for learning foreign languages

@@ -1,5 +1,7 @@
 # __Dictionary__
 
-## _This program is for learning foreign languages_
+## This program is for learning foreign languages.
 
-### 
+## __Option__
+-
+

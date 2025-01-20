@@ -4,7 +4,7 @@
 
 --------
 
-## __Option__
+## __Options__
 1. Find a Words
 2. Add new word
 3. Delete a word

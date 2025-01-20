@@ -347,7 +347,7 @@ public:
 		cout << "Choose your option:" << endl;
 		setColor(9);
 		cout << "1.Find word" << endl;;
-		cout << "2.Add new word" << endl;
+		cout << "2.Add a new word" << endl;
 		cout << "3.Delete a word" << endl;
 		cout << "4.Edit a word" << endl;
 		cout << "5.Show all words" << endl;

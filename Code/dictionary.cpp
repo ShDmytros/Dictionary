@@ -40,8 +40,7 @@ public:
 		{
 			setting.setColor(4);
 			cout << "Sorry we couldn't found the word, maybe" << endl;
-			cout << "it's not exist. Please type 2 and write it," << endl;
-			cout << "if you made a mistake durring typing." << endl;
+			cout << "it's not exist." << endl;
 			setting.setColor(7);
 		}
 	}
@@ -119,9 +118,7 @@ public:
 		if (seeking_word != end(dict))
 		{
 			string native_language_word;
-			setting.setColor(10);
 			cout << "Type a new translation of the word: ";
-			setting.setColor(7);
 			cin >> native_language_word;
 
 			dict[learning_language_word] = native_language_word;
@@ -161,18 +158,35 @@ class WorkingWithFiles
 public:
 	void ExportData(const map<string, string>& dict)
 	{
-		ofstream data_file("dictionary.txt");
+
+
+		cin.ignore();
+		string filePath;
+		cout << "Type where do you want to save the file, like 'D:\\Files\\New Folder'." << endl;
+		cout << "if you want to save file in the program folder, just type 1: ";
+		getline(cin, filePath);
+
+
+		if (filePath != "1") filePath = filePath + "/dictionary.txt";
+		else				 filePath = "dictionary.txt";
+
+		ofstream data_file(filePath);
+
 		if (data_file.is_open()) {
 			for (auto it = dict.begin(); it != dict.end(); ++it)
 				data_file << it->first << "-" << it->second << "\n";
 			data_file.close();
 
-			setting.setColor(6);
+			setting.setColor(2);
 			cout << "Data exported successfully!" << endl;
 			setting.setColor(7);
 		}
-		else
-			cout << "Error!" << endl;
+		else {
+			setting.setColor(4);
+			cout << "Error, something went wrong!" << endl;
+			cout << "Maybe the way you typed is not exist!" << endl;
+			setting.setColor(7);
+		}
 	}
 
 	void saveData(const map<string, string>& dict)

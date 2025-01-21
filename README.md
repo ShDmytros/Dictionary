@@ -147,7 +147,7 @@
 
 Якщо слова є, у користувача програма запитує розташування куди записати слова, і потрібно ввести шлях в форматі `D:\\Files\\New Folder`.
 Якщо користувач хоче записати файл у папці з самоюю програмою, він повинен ввести 1
->Type where do you want to save the file, like 'D:\\Files\\New Folder'."
+>Type where do you want to save the file, like 'D:\Files\New Folder'."
 <br>if you want to save file in the program folder, just type 1:
 
 <br>

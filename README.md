@@ -18,7 +18,7 @@
 ----------------
 
 Ця програма підтримує можливість зберігати слова, за рахунок запису у файл данних 
-з списку `map`, у файл `dictionary.data`. Вона має дві функції у класі `WorkingWithFiles`, 
+з списку `map`, у файл `dictionary.dict`. Вона має дві функції у класі `WorkingWithFiles`, 
 під назвою `saveData(const map<string, string>& dict)` та `readData(map<string, string>& dict)`.
 Під час кожного виклику головної функції `main_self()` _у класі `Menu`_, викликається функція 
 `readData(map<string, string>& dict)`.

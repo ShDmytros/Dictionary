@@ -156,9 +156,14 @@ class WorkingWithFiles
 	GraphicSettings setting;
 
 public:
-	void ExportData(const map<string, string>& dict)
+	void exportData(const map<string, string>& dict)
 	{
-
+		if (dict.size() == 0) {
+			setting.setColor(4);
+			cout << "Sorry you don't have any words yet!" << endl;
+			setting.setColor(7);
+			return;
+		}
 
 		cin.ignore();
 		string filePath;
@@ -233,6 +238,13 @@ public:
 
 	void deleteData(map<string, string>& dict)
 	{
+		if (dict.size() == 0) {
+			setting.setColor(4);
+			cout << "Sorry you don't have any words yet!" << endl;
+			setting.setColor(7);
+			return;
+		}
+
 		setting.setColor(4);
 		cout << "Are you sure, that you want to delete everything? (1 - Yes, 2 - No): ";
 		setting.setColor(7);
@@ -269,6 +281,13 @@ class Exercises
 public:
 	void guessAWord(map<string, string> dict)
 	{
+		if (dict.size() == 0) {
+			setting.setColor(4);
+			cout << "Sorry you don't have any words yet!" << endl;
+			setting.setColor(7);
+			return;
+		}
+
 		cin.ignore();
 		int askedWord_index;
 		string askedWord_foreign;
@@ -315,7 +334,7 @@ public:
 		}
 
 		setting.setColor(2);
-		cout << "Alright, you gueesed all words!" << endl;
+		cout << "Alright, you guessed all words!" << endl;
 		setting.setColor(7);
 	}
 };
@@ -406,7 +425,7 @@ public:
 		if (option == 6)
 		{
 			system("cls");
-			ExportData(dict);
+			exportData(dict);
 			cout << endl;
 			menu_self();
 		}

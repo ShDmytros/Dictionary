@@ -18,11 +18,12 @@
 ----------------
 
 Ця програма підтримує можливість зберігати слова, за рахунок запису у файл данних 
-з списку `map`, у файл `dictionary.dict`. Вона має дві функції у класі `WorkingWithFiles`, 
+з списку `map`, у файл `dictionary.dict`. Для зберігання програма використовує 2 функції у класі `WorkingWithFiles`, 
 під назвою `saveData(const map<string, string>& dict)` та `readData(map<string, string>& dict)`.
 Під час кожного виклику головної функції `main_self()` _у класі `Menu`_, викликається функція 
-`readData(map<string, string>& dict)`.
-
+`readData(map<string, string>& dict)` та під час кожної зміни списку `map`, 
+функція `saveData(const map<string, string>& dict)` змінює значення у `dictionary.dict` і пише:
+>Data saved successfully!
 ----------------
 
 ### __Find a Words__ _- знайти слово_

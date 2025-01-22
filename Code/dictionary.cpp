@@ -52,7 +52,7 @@ public:
 		string native_language_word;
 
 		cout << "Type a word from language that you study: ";
-		cin >> learning_language_word;
+		getline(cin, learning_language_word);
 
 		auto seeking_word = dict.find(learning_language_word);
 		if (seeking_word != end(dict))
@@ -82,7 +82,7 @@ public:
 		string learning_language_word;
 
 		cout << "Type a word from language you study that you want to delete: ";
-		cin >> learning_language_word;
+		getline(cin, learning_language_word);
 
 		if (dict.erase(learning_language_word))
 		{
@@ -112,14 +112,14 @@ public:
 		string learning_language_word;
 
 		cout << "Type a learning word that you want to edit: ";
-		cin >> learning_language_word;
+		getline(cin, learning_language_word);
 
 		auto seeking_word = dict.find(learning_language_word);
 		if (seeking_word != end(dict))
 		{
 			string native_language_word;
 			cout << "Type a new translation of the word: ";
-			cin >> native_language_word;
+			getline(cin, native_language_word);
 
 			dict[learning_language_word] = native_language_word;
 		}

@@ -51,6 +51,7 @@ public:
 		string learning_language_word;
 		string native_language_word;
 
+		cin.ignore();
 		cout << "Type a word from language that you study: ";
 		getline(cin, learning_language_word);
 
@@ -298,12 +299,12 @@ public:
 		cout << "Type '1' if you want to leave earlier!" << endl;
 		setting.setColor(7);
 
-		while(dict.size() != 0)
+		while (dict.size() != 0)
 		{
 			askedWord_index = rand() % dict.size();
-			
+
 			int currentIndex = 0;
-			
+
 			for (const auto& pair : dict)
 			{
 				if (currentIndex == askedWord_index)
@@ -340,31 +341,34 @@ public:
 };
 
 
-class Menu : public GraphicSettings, public WorkingWithWords, public WorkingWithFiles, public Exercises
+class Menu
 {
 protected:
 	int option;
 	map<string, string> dict;
 
-
+	GraphicSettings setting;
+	WorkingWithFiles files{};
+	WorkingWithWords words{};
+	Exercises exercise{};
 public:
 	Menu(map<string, string>& _dict) : option{ 0 }, dict{ _dict } {}
-	~Menu() 
-	{ 
-		setColor(4);
-		cout << "Exit!" << endl; 
-		setColor(7);
+	~Menu()
+	{
+		setting.setColor(4);
+		cout << "Exit!" << endl;
+		setting.setColor(7);
 	}
 
 	void menu_self()
 	{
-		readData(dict);
+		files.readData(dict);
 		cout << "------------------" << endl;
 		cout << "|      Menu      |" << endl;
 		cout << "------------------" << endl;
-		setColor(30);
+		setting.setColor(30);
 		cout << "Choose your option:" << endl;
-		setColor(9);
+		setting.setColor(9);
 		cout << "1.Find word" << endl;;
 		cout << "2.Add a new word" << endl;
 		cout << "3.Delete a word" << endl;
@@ -374,15 +378,15 @@ public:
 		cout << "7.Delete All Data" << endl;
 		cout << "8.Game 'Guess a word'" << endl;
 		cout << "9.Exit" << endl;
-		setColor(7);
-		
+		setting.setColor(7);
+
 		cout << "Write your option (1, 2, 3, 4, 5, 6, 7, 8, 9): ";
 		cin >> option;
 
 		if (option == 1)
 		{
 			system("cls");
-			FindAWord(dict);
+			words.FindAWord(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -390,8 +394,8 @@ public:
 		if (option == 2)
 		{
 			system("cls");
-			AddAWord(dict);
-			saveData(dict);
+			words.AddAWord(dict);
+			files.saveData(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -399,8 +403,8 @@ public:
 		if (option == 3)
 		{
 			system("cls");
-			DeleteAWord(dict);
-			saveData(dict);
+			words.DeleteAWord(dict);
+			files.saveData(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -408,8 +412,8 @@ public:
 		if (option == 4)
 		{
 			system("cls");
-			EditAWord(dict);
-			saveData(dict);
+			words.EditAWord(dict);
+			files.saveData(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -417,7 +421,7 @@ public:
 		if (option == 5)
 		{
 			system("cls");
-			showAllWords(dict);
+			words.showAllWords(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -425,7 +429,7 @@ public:
 		if (option == 6)
 		{
 			system("cls");
-			exportData(dict);
+			files.exportData(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -433,7 +437,7 @@ public:
 		if (option == 7)
 		{
 			system("cls");
-			deleteData(dict);
+			files.deleteData(dict);
 			cout << endl;
 			menu_self();
 		}
@@ -441,7 +445,7 @@ public:
 		if (option == 8)
 		{
 			system("cls");
-			guessAWord(dict);
+			exercise.guessAWord(dict);
 			cout << endl;
 			menu_self();
 		}

@@ -82,6 +82,7 @@ public:
 
 		string learning_language_word;
 
+		cin.ignore();
 		cout << "Type a word from language you study that you want to delete: ";
 		getline(cin, learning_language_word);
 
@@ -112,6 +113,7 @@ public:
 
 		string learning_language_word;
 
+		cin.ignore();
 		cout << "Type a learning word that you want to edit: ";
 		getline(cin, learning_language_word);
 
@@ -355,9 +357,11 @@ public:
 	Menu(map<string, string>& _dict) : option{ 0 }, dict{ _dict } {}
 	~Menu()
 	{
+		system("cls");
 		setting.setColor(4);
 		cout << "Exit!" << endl;
 		setting.setColor(7);
+		system("pause");
 	}
 
 	void menu_self()
@@ -366,6 +370,9 @@ public:
 		cout << "------------------" << endl;
 		cout << "|      Menu      |" << endl;
 		cout << "------------------" << endl;
+		cout << "Author: Dmytro Shtuchka" << endl;
+		cout << "Nick: ShDmytros" << endl;
+		cout << "------------------------------------" << endl;
 		setting.setColor(30);
 		cout << "Choose your option:" << endl;
 		setting.setColor(9);
